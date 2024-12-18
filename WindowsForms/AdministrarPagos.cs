@@ -33,12 +33,10 @@ namespace WindowsForms
             DateTime fechaPago;
             if (DateTime.TryParse(txtFechaPago.Text, out fechaPago))
             {
-                // La conversión fue exitosa, y 'fechaPago' contiene la fecha convertida
                 MessageBox.Show($"Fecha válida: {fechaPago}");
             }
             else
             {
-                // La conversión falló
                 MessageBox.Show("El formato de la fecha es inválido. Por favor, ingrese una fecha válida.");
             }
 

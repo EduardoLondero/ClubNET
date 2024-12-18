@@ -69,7 +69,7 @@ namespace WindowsForms
             TipoMembresiaService tipoMembresiaService = new TipoMembresiaService();
 
             string descripcionTM = txtDescripcion.Text;
-            string precioTexto = txtPrecio.Text;  // Cambia esto si necesitas un campo diferente
+            string precioTexto = txtPrecio.Text;
             int precioTM;
 
             bool isINT = int.TryParse(precioTexto, out precioTM);

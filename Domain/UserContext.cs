@@ -31,7 +31,7 @@ namespace Domain
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseSqlServer("Server=MIPC\\SQLEXPRESS;Database=ClubDataBase;TrustServerCertificate=True;Integrated Security=True;", sqlOptions => sqlOptions.EnableRetryOnFailure());
+            optionsBuilder.UseSqlServer("Server=KELSIER\\SQLEXPRESS;Database=ClubData;TrustServerCertificate=True;Integrated Security=True;", sqlOptions => sqlOptions.EnableRetryOnFailure());
 
     }
 }
