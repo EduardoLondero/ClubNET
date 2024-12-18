@@ -1,0 +1,25 @@
+﻿@page "/Administrar"
+@using Microsoft.AspNetCore.Components.Routing
+
+<h3>Panel de Administración</h3>
+
+<div class="admin-submenu">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/AdministrarUsuarios" Match="NavLinkMatch.All">Usuarios</NavLink>
+        </li>
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/AdministrarDeportes">Deportes</NavLink>
+        </li>
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/AdministrarMembresias" Match="NavLinkMatch.All">Membresías</NavLink>
+        </li>
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/AdministrarPagos">Pagos</NavLink>
+        </li>
+    </ul>
+</div>
+
+<div class="admin-content">
+    <RouteView />
+</div>

@@ -1,0 +1,202 @@
+﻿@page "/AdministrarMembresias"
+@inject HttpClient Http
+@using Domain.Model
+
+<h3>Gestión de Membresías</h3>
+
+
+<div class="search-container">
+    <h4>Buscar Membresía</h4>
+    <div class="form-group">
+        <label for="searchId">ID de la Membresía</label>
+        <InputText id="searchId" class="form-control" @bind-Value="searchId" placeholder="Ingrese el ID de la membresía" />
+    </div>
+    <button class="btn btn-primary" @onclick="BuscarMembresia">Buscar</button>
+</div>
+
+
+<div class="form-container mt-4">
+    <h4>@(isEdit ? "Editar Membresía" : "Agregar Nueva Membresía")</h4>
+    <EditForm Model="@membresia" OnValidSubmit="@HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="fechaInicio">Fecha de Inicio</label>
+            <InputDate id="fechaInicio" class="form-control" @bind-Value="membresia.fechaInicio" />
+        </div>
+        <div class="form-group">
+            <label for="fechaFin">Fecha de Fin</label>
+            <InputDate id="fechaFin" class="form-control" @bind-Value="membresia.fechaFin" />
+        </div>
+        <div class="form-group">
+            <label for="fechaVencimiento">Fecha de Vencimiento</label>
+            <InputDate id="fechaVencimiento" class="form-control" @bind-Value="membresia.fechaVencimiento" />
+        </div>
+        <div class="form-group">
+            <label for="oUsuarioId">ID del Usuario</label>
+            <InputNumber id="oUsuarioId" class="form-control" @bind-Value="membresia.OUsuarioId" />
+        </div>
+        <div class="form-group">
+            <label for="oTipoMembresiaId">ID del Tipo de Membresía</label>
+            <InputNumber id="oTipoMembresiaId" class="form-control" @bind-Value="membresia.oTipo_MembresiaId" />
+        </div>
+
+        <button class="btn btn-primary" type="submit">@((isEdit ? "Actualizar" : "Agregar"))</button>
+    </EditForm>
+</div>
+
+
+<div class="table-container mt-4">
+    <h4>Membresías Existentes</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha de Fin</th>
+                <th>Fecha de Vencimiento</th>
+                <th>ID Usuario</th>
+                <th>ID Tipo Membresía</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in membresias)
+            {
+                <tr>
+                    <td>@m.id</td>
+                    <td>@(m.fechaInicio?.ToString("dd/MM/yyyy") ?? "Fecha no disponible")</td>
+                    <td>@(m.fechaFin?.ToString("dd/MM/yyyy") ?? "Fecha no disponible")</td>
+                    <td>@(m.fechaVencimiento?.ToString("dd/MM/yyyy") ?? "Fecha no disponible")</td>
+                    <td>@m.OUsuarioId</td>
+                    <td>@m.oTipo_MembresiaId</td>
+                    <td>
+                        <button class="btn btn-warning" @onclick="() => EditMembresia(m.id)">Editar</button>
+                        <button class="btn btn-danger" @onclick="() => DeleteMembresia(m.id)">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (operationSuccess)
+{
+    <div class="alert alert-success" role="alert">
+        ¡Operación exitosa!
+    </div>
+}
+
+@if (operationError)
+{
+    <div class="alert alert-danger" role="alert">
+        Hubo un error, por favor intente nuevamente.
+    </div>
+}
+
+@code {
+    private List<Membresia> membresias = new();
+    private Membresia membresia = new();
+    private bool isEdit = false;
+    private bool operationSuccess = false;
+    private bool operationError = false;
+    private string searchId = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarMembresias();
+    }
+
+    private async Task CargarMembresias()
+    {
+        try
+        {
+            var response = await Http.GetAsync("api/Membresias");
+            if (response.IsSuccessStatusCode)
+            {
+                membresias = await response.Content.ReadFromJsonAsync<List<Membresia>>();
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                membresias = new List<Membresia>();
+            }
+            else
+            {
+                throw new Exception("Error al cargar membresías.");
+            }
+
+            operationError = false;
+        }
+        catch
+        {
+            operationError = true;
+            membresias = new List<Membresia>();
+        }
+    }
+
+
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            if (isEdit)
+            {
+                await Http.PutAsJsonAsync($"api/Membresias/{membresia.id}", membresia);
+            }
+            else
+            {
+                await Http.PostAsJsonAsync("api/Membresias", membresia);
+            }
+
+            operationSuccess = true;
+            operationError = false;
+            await CargarMembresias();
+            membresia = new Membresia();
+            isEdit = false;
+        }
+        catch
+        {
+            operationSuccess = false;
+            operationError = true;
+        }
+    }
+
+    private async Task BuscarMembresia()
+    {
+        try
+        {
+            membresia = await Http.GetFromJsonAsync<Membresia>($"api/Membresias/{searchId}");
+            if (membresia != null)
+            {
+                isEdit = true;
+                operationSuccess = false;
+                operationError = false;
+            }
+        }
+        catch
+        {
+            operationError = true;
+            operationSuccess = false;
+        }
+    }
+
+    private void EditMembresia(int id)
+    {
+        membresia = membresias.FirstOrDefault(m => m.id == id);
+        isEdit = true;
+    }
+
+    private async Task DeleteMembresia(int id)
+    {
+        try
+        {
+            await Http.DeleteAsync($"api/Membresias/{id}");
+            operationSuccess = true;
+            operationError = false;
+            await CargarMembresias();
+        }
+        catch
+        { }
+    }
+}

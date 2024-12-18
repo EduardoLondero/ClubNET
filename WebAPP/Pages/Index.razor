@@ -1,0 +1,132 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Components.Routing
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Club Deportivo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Inicio</NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="/contact">Contacto</NavLink>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<header class="hero bg-primary text-white text-center py-5 position-relative" style="background-image: url('/images/club.jpg'); background-size: cover; background-position: center;">
+    <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);"></div>
+    <div class="container position-relative" style="z-index: 1;">
+        <h1 class="display-4 fw-bold">Bienvenido al Club Deportivo</h1>
+        <p class="lead">Donde el deporte y la pasión se encuentran. Únete a nuestra familia.</p>
+        <a href="#eventos" class="btn btn-light btn-lg">Explorar Eventos</a>
+        <a href="#equipo" class="btn btn-outline-light btn-lg">Conoce Nuestro Equipo</a>
+    </div>
+</header>
+
+
+<section class="about py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">¿Quiénes somos?</h2>
+        <p class="text-center fs-4">En nuestro club, nos apasiona el deporte. Creamos un ambiente inclusivo para deportistas de todas las edades, desde aficionados hasta profesionales. ¡Te esperamos con los brazos abiertos!</p>
+    </div>
+</section>
+
+<section id="eventos" class="events bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Eventos Deportivos</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="images/futbol.jpg" class="card-img-top" alt="Evento 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Torneo de Fútbol</h5>
+                        <p class="card-text">Un emocionante torneo con equipos locales e internacionales. ¡Ven a apoyarnos!</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="images/natacion.jpg" class="card-img-top" alt="Evento 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Copa de Natación</h5>
+                        <p class="card-text">Competencia de natación con categorías para todas las edades. ¡Anímate a participar!</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="images/maraton.jpeg" class="card-img-top" alt="Evento 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Maratón Anual</h5>
+                        <p class="card-text">La maratón más esperada del año. Corre con nosotros y disfruta del espíritu deportivo.</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="equipo" class="team py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Conoce a Nuestro Equipo</h2>
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="images/carlos.jpg" class="card-img-top" alt="Miembro 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Carlos Gómez</h5>
+                        <p class="card-text">Entrenador de Fútbol</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="images/ana.jpg" class="card-img-top" alt="Miembro 2">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Ana López</h5>
+                        <p class="card-text">Capitana de Natación</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="images/luis.jpg" class="card-img-top" alt="Miembro 3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Luis Martínez</h5>
+                        <p class="card-text">Director Deportivo</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="images/marta.jpg" class="card-img-top" alt="Miembro 4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Marta Rodríguez</h5>
+                        <p class="card-text">Entrenadora de Atletismo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer bg-dark text-white text-center py-4">
+    <p>&copy; 2024 Club Deportivo. Todos los derechos reservados.</p>
+    <ul class="list-unstyled">
+        <li><a href="/about" class="text-white">Acerca de</a></li>
+        <li><a href="/contact" class="text-white">Contacto</a></li>
+    </ul>
+</footer>

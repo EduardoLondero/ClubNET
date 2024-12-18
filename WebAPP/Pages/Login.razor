@@ -1,0 +1,100 @@
+﻿@page "/Login"
+@using WebAPP.Services
+@inject IAuthenticationService AuthService
+
+@if (!isLoggedIn)
+{
+    <div class="login-container">
+        <div class="login-box">
+            <h4 class="text-center mb-4">Iniciar sesión</h4>
+            <input type="email" @bind="email" class="form-control mb-3" placeholder="Email" />
+            <input type="password" @bind="contraseña" class="form-control mb-3" placeholder="Contraseña" />
+            <button @onclick="OnLoginClick" class="btn btn-primary w-100">Iniciar sesión</button>
+
+            @if (!string.IsNullOrEmpty(loginError))
+            {
+                <div class="alert alert-danger mt-3">
+                    @loginError
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <p>Bienvenido, @email!</p>
+}
+
+@code {
+    private string email;
+    private string contraseña;
+    private string loginError;
+    private bool isLoggedIn = false;
+
+    private async Task OnLoginClick()
+    {
+        var user = await AuthService.AuthenticateAsync(email, contraseña);
+
+        if (user == null)
+        {
+            loginError = "Credenciales incorrectas";
+            isLoggedIn = false;
+        }
+        else
+        {
+            loginError = string.Empty;
+            isLoggedIn = true;
+        }
+    }
+}
+
+<style>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f4f8;
+    }
+
+    .login-box {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        width: 100%;
+        max-width: 400px;
+    }
+
+        .login-box h4 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .login-box .form-control {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .login-box button {
+            font-size: 16px;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+            .login-box button:hover {
+                background-color: #0056b3;
+            }
+
+    .alert {
+        text-align: center;
+    }
+
+</style>

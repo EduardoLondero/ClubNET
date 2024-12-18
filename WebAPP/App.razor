@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@using WebAPP
+@inherits LayoutComponentBase
+
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>No Encontrado</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p>Lo siento, no encontramos la página que buscas.</p>
+        </LayoutView>
+    </NotFound>
+</Router>

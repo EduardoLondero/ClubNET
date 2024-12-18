@@ -1,0 +1,228 @@
+﻿@page "/AdministrarUsuarios"
+@inject HttpClient Http
+@using Domain.Model
+
+<h3>Gestión de Usuarios</h3>
+
+
+<div class="search-container">
+    <h4>Buscar Usuario</h4>
+    <div class="form-group">
+        <label for="searchType">Buscar por:</label>
+        <select id="searchType" class="form-control" @bind="searchType">
+            <option value="id">ID</option>
+            <option value="email">Email</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="searchInput">Ingrese el valor:</label>
+        <InputText id="searchInput" class="form-control" @bind-Value="searchInput" placeholder="Ingrese el valor de búsqueda" />
+    </div>
+    <button class="btn btn-primary" @onclick="BuscarUsuario">Buscar</button>
+</div>
+
+
+<div class="form-container mt-4">
+    <h4>@(isEdit ? "Editar Usuario" : "Agregar Nuevo Usuario")</h4>
+    <EditForm Model="@usuario" OnValidSubmit="@HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="usuarioEmail">Email</label>
+            <InputText id="usuarioEmail" class="form-control" @bind-Value="usuario.email" />
+        </div>
+        <div class="form-group">
+            <label for="usuarioTelefono">Teléfono</label>
+            <InputNumber id="usuarioTelefono" class="form-control" @bind-Value="usuario.telefono" />
+        </div>
+        <div class="form-group">
+            <label for="usuarioDireccion">Dirección</label>
+            <InputText id="usuarioDireccion" class="form-control" @bind-Value="usuario.direccion" />
+        </div>
+        <div class="form-group">
+            <label for="usuarioContraseña">Contraseña</label>
+            <InputText id="usuarioContraseña" class="form-control" @bind-Value="usuario.contraseña" type="password" />
+        </div>
+        <div class="form-group">
+            <label for="oRolId">ID del Rol</label>
+            <InputNumber id="oRolId" class="form-control" @bind-Value="usuario.oRolId" />
+        </div>
+        <div class="form-group">
+            <label for="oLocalidadId">ID de Localidad</label>
+            <InputNumber id="oLocalidadId" class="form-control" @bind-Value="usuario.oLocalidadId" />
+        </div>
+
+        <button class="btn btn-primary" type="submit">@((isEdit ? "Actualizar" : "Agregar"))</button>
+    </EditForm>
+</div>
+
+
+<div class="table-container mt-4">
+    <h4>Usuarios Existentes</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Rol ID</th>
+                <th>Localidad ID</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in usuarios)
+            {
+                <tr>
+                    <td>@u.Id</td>
+                    <td>@u.email</td>
+                    <td>@u.telefono</td>
+                    <td>@u.direccion</td>
+                    <td>@u.oRolId</td>
+                    <td>@u.oLocalidadId</td>
+                    <td>
+                        <button class="btn btn-warning" @onclick="() => EditUsuario(u.Id)">Editar</button>
+                        <button class="btn btn-danger" @onclick="() => DeleteUsuario(u.Id)">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@if (operationSuccess)
+{
+    <div class="alert alert-success" role="alert">
+        ¡Operación exitosa!
+    </div>
+}
+
+@if (operationError)
+{
+    <div class="alert alert-danger" role="alert">
+        Hubo un error, por favor intente nuevamente.
+    </div>
+}
+
+
+@code {
+    private string searchType = "id"; 
+    private string searchInput = ""; 
+    private List<Usuario> usuarios = new(); 
+    private Usuario usuario = new(); 
+    private bool isEdit = false; 
+    private bool operationSuccess = false; 
+    private bool operationError = false;
+    private string searchId = ""; 
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarUsuarios();
+    }
+
+    private async Task CargarUsuarios()
+    {
+        try
+        {
+            usuarios = await Http.GetFromJsonAsync<List<Usuario>>("api/Usuarios");
+        }
+        catch
+        {
+            operationError = true;
+            operationSuccess = false;
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            if (isEdit)
+            {
+                await Http.PutAsJsonAsync($"api/Usuarios/{usuario.Id}", usuario);
+            }
+            else
+            {
+                await Http.PostAsJsonAsync("api/Usuarios", usuario);
+            }
+
+            operationSuccess = true;
+            operationError = false;
+            await CargarUsuarios();
+            usuario = new Usuario();
+            isEdit = false;
+        }
+        catch
+        {
+            operationError = true;
+            operationSuccess = false;
+        }
+    }
+
+    private async Task BuscarUsuario()
+    {
+        try
+        {
+            if (searchType == "id" && int.TryParse(searchInput, out int id))
+            {
+                
+                var encontrado = await Http.GetFromJsonAsync<Usuario>($"api/Usuarios/{id}");
+                if (encontrado != null)
+                {
+                    usuario = encontrado;
+                    isEdit = true;
+                    operationError = false;
+                    operationSuccess = false;
+                }
+            }
+            else if (searchType == "email" && !string.IsNullOrWhiteSpace(searchInput))
+            {
+                
+                var encontrado = await Http.GetFromJsonAsync<Usuario>($"api/Usuarios/byEmail/{searchInput}");
+                if (encontrado != null)
+                {
+                    usuario = encontrado;
+                    isEdit = true;
+                    operationError = false;
+                    operationSuccess = false;
+                }
+            }
+            else
+            {
+                operationError = true;
+                operationSuccess = false;
+            }
+        }
+        catch
+        {
+            operationError = true;
+            operationSuccess = false;
+        }
+    }
+
+
+    private void EditUsuario(int id)
+    {
+        usuario = usuarios.FirstOrDefault(u => u.Id == id);
+        isEdit = true;
+    }
+
+    private async Task DeleteUsuario(int id)
+    {
+        try
+        {
+            await Http.DeleteAsync($"api/Usuarios/{id}");
+            operationSuccess = true;
+            operationError = false;
+            await CargarUsuarios();
+        }
+        catch
+        {
+            operationError = true;
+            operationSuccess = false;
+        }
+    }
+}

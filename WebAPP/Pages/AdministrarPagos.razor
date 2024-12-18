@@ -1,0 +1,178 @@
+﻿@page "/AdministrarPagos"
+@using Domain.Model;
+@inject HttpClient Http
+@using Microsoft.EntityFrameworkCore
+
+<h3>Gestión de Pagos</h3>
+
+<div class="search-container">
+    <h4>Buscar Pago</h4>
+    <div class="form-group">
+        <label for="searchId">ID del Pago</label>
+        <InputText id="searchId" class="form-control" @bind-Value="searchId" placeholder="Ingrese el ID del pago" />
+    </div>
+    <button class="btn btn-primary" @onclick="BuscarPago">Buscar</button>
+</div>
+
+<div class="form-container mt-4">
+    <h4>@(isEdit ? "Editar Pago" : "Agregar Nuevo Pago")</h4>
+    <EditForm Model="@pago" OnValidSubmit="@HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="fechaPago">Fecha de Pago</label>
+            <InputDate id="fechaPago" class="form-control" @bind-Value="pago.fechaPago" />
+        </div>
+        <div class="form-group">
+            <label for="estado">Estado del Pago</label>
+            <InputText id="estado" class="form-control" @bind-Value="pago.estado" />
+        </div>
+        <div class="form-group">
+            <label for="oMembresiaId">ID de la Membresía</label>
+            <InputNumber id="oMembresiaId" class="form-control" @bind-Value="pago.oMembresiaId" />
+        </div>
+        <div class="form-group">
+            <label for="precioTotal">Precio Total</label>
+            <InputNumber id="precioTotal" class="form-control" @bind-Value="pago.precioTotal" />
+        </div>
+
+        <button class="btn btn-primary" type="submit">@((isEdit ? "Actualizar" : "Agregar"))</button>
+    </EditForm>
+</div>
+
+<div class="table-container mt-4">
+    <h4>Pagos Existentes</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha de Pago</th>
+                <th>Estado</th>
+                <th>ID Membresía</th>
+                <th>Precio Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in pagos)
+            {
+                <tr>
+                    <td>@p.id</td>
+                    <td>@(p.fechaPago?.ToString("dd/MM/yyyy") ?? "Fecha no disponible")</td>
+                    <td>@p.estado</td>
+                    <td>@p.oMembresiaId</td>
+                    <td>@p.precioTotal</td>
+                    <td>
+
+                        <button class="btn btn-warning" @onclick="() => EditPago(p.id)">
+                            Editar
+                        </button>
+
+                        <button class="btn btn-danger" @onclick="() => DeletePago(p.id)">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (operationSuccess)
+{
+    <div class="alert alert-success" role="alert">
+        ¡Operación exitosa!
+    </div>
+}
+
+@if (operationError)
+{
+    <div class="alert alert-danger" role="alert">
+        Hubo un error, por favor intente nuevamente.
+    </div>
+}
+
+@code {
+    private List<Domain.Model.Pago> pagos = new();
+    private Domain.Model.Pago pago = new();
+    private bool isEdit = false; 
+    private bool operationSuccess = false;
+    private bool operationError = false;
+    private string searchId = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarPagos();
+    }
+
+    private async Task CargarPagos()
+    {
+        pagos = await Http.GetFromJsonAsync<List<Pago>>("api/Pagos");
+    }
+
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            if (isEdit)
+            {
+                await Http.PutAsJsonAsync($"api/Pagos/{pago.id}", pago);
+            }
+            else
+            {
+                await Http.PostAsJsonAsync("api/Pagos", pago);
+            }
+
+            operationSuccess = true;
+            operationError = false;
+            await CargarPagos();
+            pago = new Domain.Model.Pago();
+            isEdit = false;
+        }
+        catch
+        {
+            operationSuccess = false;
+            operationError = true;
+        }
+    }
+
+    private async Task BuscarPago()
+    {
+        var respuesta = await Http.GetAsync($"api/Pagos/{searchId}");
+        if (respuesta.IsSuccessStatusCode)
+        {
+            pago = await respuesta.Content.ReadFromJsonAsync<Pago>();
+            isEdit = true;
+            operationSuccess = false;
+            operationError = false;
+        }
+        else
+        {
+            operationError = true;
+            operationSuccess = false;
+        }
+    }
+
+    private void EditPago(int id)
+    {
+        pago = pagos.FirstOrDefault(p => p.id == id);
+        isEdit = true;
+    }
+
+    private async Task DeletePago(int id)
+    {
+        var respuesta = await Http.DeleteAsync($"api/Pagos/{id}");
+        if (respuesta.IsSuccessStatusCode)
+        {
+            operationSuccess = true;
+            operationError = false;
+            await CargarPagos();
+        }
+        else
+        {
+            operationError = true;
+            operationSuccess = false;
+        }
+    }
+}

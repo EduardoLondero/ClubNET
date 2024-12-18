@@ -1,0 +1,193 @@
+﻿@page "/AdministrarDeportes"
+@using Domain
+@inject HttpClient Http
+@using Microsoft.EntityFrameworkCore
+
+<h3>Gestión de Deportes</h3>
+
+<div class="search-container">
+    <h4>Buscar Deporte</h4>
+    <div class="form-group">
+        <label for="searchId">ID del Deporte</label>
+        <InputText id="searchId" class="form-control" @bind-Value="searchId" placeholder="Ingrese el ID del deporte" />
+    </div>
+    <button class="btn btn-primary" @onclick="BuscarDeporte">Buscar</button>
+</div>
+
+<div class="form-container mt-4">
+    <h4>@(isEdit ? "Editar Deporte" : "Agregar Nuevo Deporte")</h4>
+    <EditForm Model="@deporte" OnValidSubmit="@HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="deporteNombre">Nombre</label>
+            <InputText id="deporteNombre" class="form-control" @bind-Value="deporte.nombreDeporte" />
+        </div>
+
+        <div class="form-group">
+            <label for="deporteHoraInicio">Hora de Inicio</label>
+            <InputText id="deporteHoraInicio" class="form-control" @bind-Value="deporte.horaInicio" />
+        </div>
+
+        <div class="form-group">
+            <label for="deporteHoraFin">Hora de Finalización</label>
+            <InputText id="deporteHoraFin" class="form-control" @bind-Value="deporte.horaFin" />
+        </div>
+
+        <div class="form-group">
+            <label for="deportePrecio">Precio</label>
+            <InputNumber id="deportePrecio" class="form-control" @bind-Value="deporte.precio" />
+        </div>
+
+        <button class="btn btn-primary" type="submit">@((isEdit ? "Actualizar" : "Agregar"))</button>
+    </EditForm>
+</div>
+
+<div class="table-container mt-4">
+    <h4>Deportes Existentes</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Hora de Inicio</th>
+                <th>Hora de Fin</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in deportes)
+            {
+                <tr>
+                    <td>@d.Id</td>
+                    <td>@d.nombreDeporte</td>
+                    <td>@d.horaInicio</td>
+                    <td>@d.horaFin</td>
+                    <td>@d.precio</td>
+                    <td>
+                        <button class="btn btn-warning" @onclick="() => EditDeporte(d)">
+                            Editar
+                        </button>
+                        <button class="btn btn-danger" @onclick="() => DeleteDeporte(d)">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (operationSuccess)
+{
+    <div class="alert alert-success" role="alert">
+        ¡Operación exitosa!
+    </div>
+}
+
+@if (operationError)
+{
+    <div class="alert alert-danger" role="alert">
+        Hubo un error, por favor intente nuevamente.
+    </div>
+}
+
+@code {
+
+    private List<Domain.Model.Deporte> deportes = new();
+    private Domain.Model.Deporte deporte = new();
+    private bool isEdit = false;
+    private bool operationSuccess = false;
+    private bool operationError = false;
+    private string searchId = "";
+
+    private async Task HandleSubmit()
+    {
+        try
+        {
+            if (isEdit)
+            {
+                var existingDeporte = await Http.GetFromJsonAsync<Domain.Model.Deporte>($"api/Deportes/{deporte.Id}");
+                if (existingDeporte != null)
+                {
+                    await Http.PutAsJsonAsync($"api/Deportes/{deporte.Id}", deporte);
+                }
+            }
+            else
+            {
+                await Http.PostAsJsonAsync("api/Deportes", deporte);
+            }
+
+            deporte = new Domain.Model.Deporte();
+            isEdit = false;
+            operationSuccess = true;
+            operationError = false;
+            await CargarDeportes();
+        }
+        catch
+        {
+            operationSuccess = false;
+            operationError = true;
+        }
+    }
+
+    private async Task BuscarDeporte()
+    {
+        try
+        {
+            if (int.TryParse(searchId, out int id))
+            {
+                var encontrado = await Http.GetFromJsonAsync<Domain.Model.Deporte>($"api/Deportes/{id}");
+                if (encontrado != null)
+                {
+                    deporte = encontrado;
+                    isEdit = true;
+                    operationSuccess = false;
+                    operationError = false;
+                }
+                else
+                {
+                    operationError = true;
+                }
+            }
+        }
+        catch
+        {
+            operationError = true;
+        }
+    }
+
+    private async Task CargarDeportes()
+    {
+        deportes = await Http.GetFromJsonAsync<List<Domain.Model.Deporte>>("api/Deportes");
+    }
+
+    private void EditDeporte(Domain.Model.Deporte d)
+    {
+        deporte = d;
+        isEdit = true;
+    }
+
+    private async Task DeleteDeporte(Domain.Model.Deporte d)
+    {
+        try
+        {
+            await Http.DeleteAsync($"api/Deportes/{d.Id}");
+            operationSuccess = true;
+            operationError = false;
+            await CargarDeportes();
+        }
+        catch
+        {
+            operationError = true;
+            operationSuccess = false;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarDeportes();
+    }
+}
