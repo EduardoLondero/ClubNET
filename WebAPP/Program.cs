@@ -5,6 +5,7 @@ using Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 using WebAPP;
 using Microsoft.EntityFrameworkCore;
+using Blazored.LocalStorage;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 

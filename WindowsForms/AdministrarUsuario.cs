@@ -49,6 +49,7 @@ namespace WindowsForms
         {
             btonEliminar.Enabled = true;
 
+
             int UserIdToSearch = (int)cboxUsuario.SelectedValue;
 
             UserServices userService = new UserServices();
@@ -71,16 +72,27 @@ namespace WindowsForms
 
         private void btonAdministrar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtDireccion.Text) || string.IsNullOrEmpty(txtPassword.Text))
+            {
+                MessageBox.Show("Por favor, complete todos los campos obligatorios.");
+                return;
+            }
+
+            if (!IsValidEmail(txtEmail.Text))
+            {
+                MessageBox.Show("El formato del email es inválido.");
+                return;
+            }
+
             UserServices userService = new UserServices();
 
             int telefonoToUpdate;
             bool isInt = int.TryParse(txtTelefono.Text, out telefonoToUpdate);
-
-            if (isInt != true)
+            if (!isInt)
             {
-                MessageBox.Show("Telefono Ingresado Invalido");
+                MessageBox.Show("Teléfono ingresado inválido.");
                 return;
-            };
+            }
 
             int rolSeleccionado = (int)cBoxRol.SelectedValue;
             int localidadSeleccionada = (int)cBoxLocalidad.SelectedValue;
@@ -94,7 +106,7 @@ namespace WindowsForms
             Usuario usuarioToUpdate = userService.Get(userIdToUpdate);
             if (usuarioToUpdate == null)
             {
-                MessageBox.Show("Usuario no encontrado para actualizar");
+                MessageBox.Show("Usuario no encontrado para actualizar.");
                 return;
             }
 
@@ -106,7 +118,13 @@ namespace WindowsForms
             usuarioToUpdate.oRolId = rolSeleccionado;
 
             userService.Update(usuarioToUpdate);
-            MessageBox.Show("Usuario actualizado");
+            MessageBox.Show("Usuario actualizado con éxito.");
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            var emailRegex = new System.Text.RegularExpressions.Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            return emailRegex.IsMatch(email);
         }
 
         private void btonEliminar_Click(object sender, EventArgs e)

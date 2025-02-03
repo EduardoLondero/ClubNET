@@ -31,8 +31,6 @@ namespace Domain.Services
             using var context = new userContext();
 
             return context.Usuario
-                                  .Include(e => e.oLocalidad)
-                                  .Include(r => r.oRol)
                                   .Include(u => u.Membresias)
                                   .ThenInclude(a => a.oTipo_Membresia)
                                   .FirstOrDefault(u => u.Id == idUsuario);

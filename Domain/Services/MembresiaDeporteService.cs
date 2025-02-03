@@ -1,4 +1,5 @@
 ﻿using Domain.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,19 @@ namespace Domain.Services
             return context.Membresia_Deporte.Find(membresiaId);
 
         }
+
+        public List<Membresia_deporte> GetMembresiasByDeporteId(int deporteId)
+        {
+            using var context = new userContext();
+
+            return context.Membresia_Deporte
+                         .Include(md => md.oMembresia)            
+                            .ThenInclude(m => m.oUsuario)       
+                         .Include(md => md.oDeporte)              
+                         .Where(md => md.oDeporteId == deporteId) 
+                         .ToList();
+        }
+
 
         public IEnumerable<Membresia_deporte> GetAll()
         {

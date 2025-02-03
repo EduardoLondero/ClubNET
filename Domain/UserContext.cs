@@ -25,13 +25,25 @@ namespace Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Membresia_deporte>()
                 .HasKey(md => new { md.oMembresiaId, md.oDeporteId });
 
+            modelBuilder.Entity<Membresia_deporte>()
+                .HasOne(md => md.oMembresia)
+                .WithMany(m => m.Membresias) 
+                .HasForeignKey(md => md.oMembresiaId);
+
+            modelBuilder.Entity<Membresia_deporte>()
+                .HasOne(md => md.oDeporte)
+                .WithMany(d => d.Membresias)
+                .HasForeignKey(md => md.oDeporteId);
         }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseSqlServer("Server=KELSIER\\SQLEXPRESS;Database=ClubData;TrustServerCertificate=True;Integrated Security=True;", sqlOptions => sqlOptions.EnableRetryOnFailure());
+            optionsBuilder.UseSqlServer("Server=KELSIER\\SQLEXPRESS;Database=Club;TrustServerCertificate=True;Integrated Security=True;", sqlOptions => sqlOptions.EnableRetryOnFailure());
 
     }
 }

@@ -54,24 +54,28 @@ public class UsuariosController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateUsuario([FromBody] Usuario usuario)
+    public async Task<IActionResult> Post([FromBody] Usuario usuario)
     {
-        try
+        if (!ModelState.IsValid)
         {
-            if (usuario == null)
-            {
-                return BadRequest(new { message = "Los datos del usuario no son válidos." });
-            }
+            return BadRequest(ModelState);
+        }
 
-            _context.Usuario.Add(usuario);
-            await _context.SaveChangesAsync();
-            return Ok(new { message = "Usuario creado con éxito." });
-        }
-        catch (Exception ex)
+        // Buscar los objetos de Rol y Localidad usando los Id
+        var rol = await _context.Rol.FindAsync(usuario.oRolId);
+        var localidad = await _context.Localidad.FindAsync(usuario.oLocalidadId);
+
+        if (rol == null || localidad == null)
         {
-            return StatusCode(500, new { message = "Error interno del servidor.", details = ex.Message });
+            return BadRequest("Rol o Localidad no encontrados.");
         }
+
+        _context.Usuario.Add(usuario);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
     }
+
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateUsuario(int id, [FromBody] Usuario usuario)

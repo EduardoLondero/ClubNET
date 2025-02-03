@@ -1,0 +1,79 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = WebAPP
+build_property.RootNamespace = WebAPP
+build_property.ProjectDir = D:\ClubNET\WebAPP\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\ClubNET\WebAPP
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/ClubNET/WebAPP/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/Pages/About.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWJvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/Pages/Administrar.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/Pages/AdministrarDeportes.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXJEZXBvcnRlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/Pages/AdministrarMembresias.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXJNZW1icmVzaWFzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/Pages/AdministrarPagos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXJQYWdvcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/Pages/AdministrarUsuarios.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXJVc3Vhcmlvcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/Pages/Contacto.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29udGFjdG8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/Pages/MyPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTXlQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ClubNET/WebAPP/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-xviyhdnd0k
+
+[D:/ClubNET/WebAPP/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-mgww3cav7o

@@ -40,8 +40,6 @@ namespace WindowsForms
                     usuario.telefono,
                     usuario.direccion,
                     usuario.contraseña,
-                    RolDescripcion = usuario.oRol?.descripcionrol ?? "Sin rol", 
-                    LocalidadNombre = usuario.oLocalidad?.nombreLocalidad ?? "Sin localidad"
                 };
 
                 var listaUsuarios = new List<object> { usuarioProyectado };

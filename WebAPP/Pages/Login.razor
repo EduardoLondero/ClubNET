@@ -1,6 +1,7 @@
 ﻿@page "/Login"
 @using WebAPP.Services
 @inject IAuthenticationService AuthService
+@inject NavigationManager Navigation
 
 @if (!isLoggedIn)
 {
@@ -22,7 +23,10 @@
 }
 else
 {
-    <p>Bienvenido, @email!</p>
+    <div class="welcome-container">
+        <p>Bienvenido, @email!</p>
+        <button @onclick="OnLogoutClick" class="btn btn-secondary mt-3">Cerrar sesión</button>
+    </div>
 }
 
 @code {
@@ -44,7 +48,29 @@ else
         {
             loginError = string.Empty;
             isLoggedIn = true;
+
+            AuthService.NotifyAuthStateChanged();
+
+            if (user.oRolId == 1)
+            {
+                Navigation.NavigateTo("/Administrar");
+            }
+            else
+            {
+                Navigation.NavigateTo("/");
+            }
         }
+    }
+
+    private void OnLogoutClick()
+    {
+        AuthService.Logout();
+        isLoggedIn = false;
+        email = string.Empty;
+        contraseña = string.Empty;
+        loginError = string.Empty;
+        AuthService.NotifyAuthStateChanged();
+        Navigation.NavigateTo("/");
     }
 }
 
@@ -93,8 +119,17 @@ else
                 background-color: #0056b3;
             }
 
-    .alert {
+    .welcome-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f0f4f8;
         text-align: center;
     }
 
+    .alert {
+        text-align: center;
+    }
 </style>

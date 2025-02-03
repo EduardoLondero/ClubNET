@@ -31,44 +31,49 @@ namespace WindowsForms
             string pagoEstado = txtEstado.Text;
 
             DateTime fechaPago;
-            if (DateTime.TryParse(txtFechaPago.Text, out fechaPago))
-            {
-                MessageBox.Show($"Fecha válida: {fechaPago}");
-            }
-            else
+            if (!DateTime.TryParse(txtFechaPago.Text, out fechaPago))
             {
                 MessageBox.Show("El formato de la fecha es inválido. Por favor, ingrese una fecha válida.");
+                return;
             }
 
             int idMembresia;
-            bool isInt = int.TryParse(txtIDMembresia.Text, out idMembresia);
-            if (isInt != true)
+            if (!int.TryParse(txtIDMembresia.Text, out idMembresia))
             {
-                MessageBox.Show("Se ha ingresado un ID Invalido");
+                MessageBox.Show("Se ha ingresado un ID inválido.");
+                return;
             }
+
             int precio;
-            bool priceIsInt = int.TryParse(txtPagoTotal.Text, out precio);
-            if (priceIsInt != true)
+            if (!int.TryParse(txtPagoTotal.Text, out precio))
             {
-                MessageBox.Show("Se ha ingresado un monto invalido");
+                MessageBox.Show("Se ha ingresado un monto inválido.");
+                return;
             }
 
-            if (priceIsInt == true && isInt == true)
+            MembresiaService membresiaService = new MembresiaService();
+            
+            if (membresiaService.Get(idMembresia) == null)
             {
-                PagoService pagoService = new PagoService();
-
-                Pago newPago = new Pago
-                {
-                    estado = pagoEstado,
-                    fechaPago = fechaPago,
-                    precioTotal = precio,
-                    oMembresiaId = idMembresia,
-                };
-
-                pagoService.Add(newPago);
-                MessageBox.Show("Pago Realizado Con Exito");
-                this.Close();
+                MessageBox.Show("No existe ninguna membresia con esa ID");
+                return;
             }
+
+
+            PagoService pagoService = new PagoService();
+
+            Pago newPago = new Pago
+            {
+                estado = pagoEstado,
+                fechaPago = fechaPago,
+                precioTotal = precio,
+                oMembresiaId = idMembresia,
+            };
+
+            pagoService.Add(newPago);
+            MessageBox.Show("Pago Realizado Con Éxito");
+            this.Close();
         }
+
     }
 }

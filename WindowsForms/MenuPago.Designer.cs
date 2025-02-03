@@ -37,6 +37,7 @@
             btonVolver = new Button();
             panel3 = new Panel();
             dgvPagos = new DataGridView();
+            btonGenerarReporte = new Button();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -90,6 +91,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(btonGenerarReporte);
             panel2.Controls.Add(btonActualizar);
             panel2.Controls.Add(btonVolver);
             panel2.Dock = DockStyle.Bottom;
@@ -138,6 +140,16 @@
             dgvPagos.Size = new Size(612, 379);
             dgvPagos.TabIndex = 0;
             // 
+            // btonGenerarReporte
+            // 
+            btonGenerarReporte.Location = new Point(81, 2);
+            btonGenerarReporte.Name = "btonGenerarReporte";
+            btonGenerarReporte.Size = new Size(75, 23);
+            btonGenerarReporte.TabIndex = 2;
+            btonGenerarReporte.Text = "Reporte";
+            btonGenerarReporte.UseVisualStyleBackColor = true;
+            btonGenerarReporte.Click += btonGenerarReporte_Click;
+            // 
             // MenuPago
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -172,5 +184,6 @@
         private Button btonVolver;
         private Panel panel3;
         private DataGridView dgvPagos;
+        private Button btonGenerarReporte;
     }
 }

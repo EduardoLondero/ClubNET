@@ -20,6 +20,7 @@ namespace WindowsForms
 
             cargarProvincias();
 
+            btonEditar.Enabled = false;
         }
 
 
@@ -41,6 +42,7 @@ namespace WindowsForms
         private void btonBuscar_Click(object sender, EventArgs e)
         {
             btonCrear.Enabled = false;
+            btonEditar.Enabled = true;
 
             ProvinciaService provinciaService = new ProvinciaService();
             int idProvincia = (int)cBoxProvincia.SelectedValue;
@@ -54,31 +56,48 @@ namespace WindowsForms
 
         private void btonEditar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtNombrePronvincia.Text))
+            {
+                MessageBox.Show("Por favor, ingrese un nombre para la provincia.");
+                return;
+            }
+
             ProvinciaService provinciaService = new ProvinciaService();
             int idProvincia = (int)cBoxProvincia.SelectedValue;
 
             Provincia provinciaToUpdate = provinciaService.Get(idProvincia);
 
+            if (provinciaToUpdate == null)
+            {
+                MessageBox.Show("Provincia no encontrada.");
+                return;
+            }
+
             provinciaToUpdate.nombreProvincia = txtNombrePronvincia.Text;
 
             provinciaService.Update(provinciaToUpdate);
 
-            MessageBox.Show("Provincia Actualizada Con Exito");
+            MessageBox.Show("Provincia Actualizada Con Éxito");
         }
 
         private void btonCrear_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtNombrePronvincia.Text))
+            {
+                MessageBox.Show("Por favor, ingrese un nombre para la provincia.");
+                return;
+            }
+
             ProvinciaService provinciaService = new ProvinciaService();
 
             Provincia provinciaNew = new Provincia
             {
                 nombreProvincia = txtNombrePronvincia.Text
-
             };
 
             provinciaService.Add(provinciaNew);
 
-            MessageBox.Show("Provincia Creada Con Exito");
+            MessageBox.Show("Provincia Creada Con Éxito");
 
             cargarProvincias();
         }

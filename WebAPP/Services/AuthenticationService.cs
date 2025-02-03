@@ -4,6 +4,9 @@ using WebAPP.Services;
 public class AuthenticationService : IAuthenticationService
 {
     private readonly HttpClient _httpClient;
+    private User? _currentUser;
+
+    public event Action? OnAuthStateChanged;
 
     public AuthenticationService(HttpClient httpClient)
     {
@@ -18,11 +21,33 @@ public class AuthenticationService : IAuthenticationService
 
         if (response.IsSuccessStatusCode)
         {
-            return await response.Content.ReadFromJsonAsync<User>();
+            var user = await response.Content.ReadFromJsonAsync<User>();
+            _currentUser = user;
+
+            NotifyAuthStateChanged();
+            return user;
+
         }
 
         return null;
     }
+
+    public User? GetCurrentUser()
+    {
+        return _currentUser;
+    }
+
+    public void Logout()
+    {
+        _currentUser = null;
+        NotifyAuthStateChanged();
+    }
+
+    public void NotifyAuthStateChanged()
+    {
+        OnAuthStateChanged?.Invoke();
+    }
+
 }
 
 public class User

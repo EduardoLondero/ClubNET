@@ -1,5 +1,7 @@
 ﻿using Domain.Model;
 using Domain.Services;
+using Microsoft.VisualBasic.ApplicationServices;
+using Reports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -66,6 +68,22 @@ namespace WindowsForms
         {
             buscarPagos(dgvPagos, usuario);
         }
+
+        private void btonGenerarReporte_Click(object sender, EventArgs e)
+        {
+            PagoService pagoService = new PagoService();
+            List<Pago> pagos = pagoService.ObtenerPagosPorUsuario(usuario.Id);
+
+            string filePath = "C:\\Reportes\\Pagos";
+
+            ReporteService reporteService = new ReporteService();
+
+            reporteService.GenerarReportePagos(filePath, usuario, pagos);
+
+            MessageBox.Show("Reporte generado con éxito.");
+        }
+
+
     }
 
 

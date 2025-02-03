@@ -1,0 +1,93 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\obj\\Debug\\net8.0\\compressed\\w2aw847691.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\obj\\Debug\\net8.0\\scopedcss\\bundle\\WebAPP.styles.css",
+      "PackagePath": "staticwebassets\\WebAPP.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\images\\ana.jpg",
+      "PackagePath": "staticwebassets\\images\\ana.jpg"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\images\\carlos.jpg",
+      "PackagePath": "staticwebassets\\images\\carlos.jpg"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\images\\club.jpg",
+      "PackagePath": "staticwebassets\\images\\club.jpg"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\images\\futbol.jpg",
+      "PackagePath": "staticwebassets\\images\\futbol.jpg"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\images\\luis.jpg",
+      "PackagePath": "staticwebassets\\images\\luis.jpg"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\images\\maraton.jpeg",
+      "PackagePath": "staticwebassets\\images\\maraton.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\images\\marta.jpg",
+      "PackagePath": "staticwebassets\\images\\marta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\images\\natacion.jpg",
+      "PackagePath": "staticwebassets\\images\\natacion.jpg"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\wwwroot\\sample-data\\weather.json",
+      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WebAPP.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.WebAPP.props",
+      "PackagePath": "build\\WebAPP.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.WebAPP.props",
+      "PackagePath": "buildMultiTargeting\\WebAPP.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.WebAPP.props",
+      "PackagePath": "buildTransitive\\WebAPP.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

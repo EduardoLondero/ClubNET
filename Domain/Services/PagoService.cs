@@ -46,9 +46,12 @@ namespace Domain.Services
         {
             using var context = new userContext();
 
-            return context.Pago.ToList();
-
+            return context.Pago
+                .Include(p => p.oMembresia) 
+                .ThenInclude(m => m.oUsuario) 
+                .ToList();
         }
+
 
 
         public void Update(Pago pago)
@@ -85,5 +88,34 @@ namespace Domain.Services
 
             return !isReferenced;
         }
+
+        // En PagoService o ReportService
+        public List<Pago> ObtenerPagosPorUsuario(int usuarioId)
+        {
+            MembresiaService membresiaService = new MembresiaService();
+            PagoService pagoService = new PagoService();
+
+            // Obtener las membresías del usuario
+            List<Membresia> membresias = membresiaService.ObtenerUsuarioMembresias(usuarioId);
+
+            // Crear una lista de pagos para retornar
+            var pagosView = new List<Pago>();
+
+            // Iterar sobre las membresías y obtener los pagos asociados
+            foreach (var membresia in membresias)
+            {
+                // Obtener los pagos de cada membresía
+                Pago pago = pagoService.ObtenerPagosPorMembresia(membresia.id);
+
+                if (pago != null)
+                {
+                    pagosView.Add(pago);  // Añadir el objeto Pago completo a la lista
+                }
+            }
+
+            return pagosView;  // Retornar la lista de pagos
+        }
+
+
     }
 }

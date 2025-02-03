@@ -27,6 +27,7 @@ namespace WindowsForms
             cBoxTipoMembresia.DisplayMember = "descripcion";
             cBoxTipoMembresia.ValueMember = "id";
 
+            btonEditar.Enabled = false;
         }
 
         private void btonVolver_Click(object sender, EventArgs e)
@@ -37,21 +38,29 @@ namespace WindowsForms
         private void btonBuscar_Click(object sender, EventArgs e)
         {
             btonEliminar.Enabled = true;
-
+            btonEditar.Enabled = true;
             btonCrear.Enabled = false;
+
+            if (cBoxTipoMembresia.SelectedValue == null)
+            {
+                MessageBox.Show("Debe seleccionar un tipo de membresía.");
+                return;
+            }
 
             int tipoMembresia = (int)cBoxTipoMembresia.SelectedValue;
 
             TipoMembresiaService tipoMembresiaService = new TipoMembresiaService();
 
-            Tipo_Membresia tMembresia = new Tipo_Membresia();
+            Tipo_Membresia tMembresia = tipoMembresiaService.Get(tipoMembresia);
 
-            tMembresia = tipoMembresiaService.Get(tipoMembresia);
+            if (tMembresia == null)
+            {
+                MessageBox.Show("Tipo de membresía no encontrado.");
+                return;
+            }
 
             txtDescripcion.Text = tMembresia.descripcion;
             txtPrecio.Text = tMembresia.precioMembresia.ToString();
-
-
         }
 
         private void btonEditar_Click(object sender, EventArgs e)
@@ -72,15 +81,20 @@ namespace WindowsForms
             string precioTexto = txtPrecio.Text;
             int precioTM;
 
-            bool isINT = int.TryParse(precioTexto, out precioTM);
-
-            int tipoMembresia = (int)cBoxTipoMembresia.SelectedValue;
-
-            if (!isINT)
+            if (string.IsNullOrEmpty(descripcionTM))
             {
-                MessageBox.Show("Error con el Precio Ingresado");
+                MessageBox.Show("La descripción no puede estar vacía.");
                 return;
             }
+
+            bool isINT = int.TryParse(precioTexto, out precioTM);
+            if (!isINT || precioTM <= 0)
+            {
+                MessageBox.Show("El precio ingresado es inválido.");
+                return;
+            }
+
+            int tipoMembresia = (int)cBoxTipoMembresia.SelectedValue;
 
             Tipo_Membresia tMembresia = tipoMembresiaService.Get(tipoMembresia);
             if (tMembresia == null)
@@ -93,7 +107,7 @@ namespace WindowsForms
             tMembresia.precioMembresia = precioTM;
             tipoMembresiaService.Update(tMembresia);
 
-            MessageBox.Show("Tipo Membresía Editada Con Exito");
+            MessageBox.Show("Tipo de Membresía Editada Con Éxito");
         }
 
         private void CrearTipoMembresia()
@@ -104,11 +118,16 @@ namespace WindowsForms
             string precioTexto = txtPrecio.Text;
             int precioTM;
 
-            bool isINT = int.TryParse(precioTexto, out precioTM);
-
-            if (!isINT)
+            if (string.IsNullOrEmpty(descripcionTM))
             {
-                MessageBox.Show("Error con el Precio Ingresado");
+                MessageBox.Show("La descripción no puede estar vacía.");
+                return;
+            }
+
+            bool isINT = int.TryParse(precioTexto, out precioTM);
+            if (!isINT || precioTM <= 0)
+            {
+                MessageBox.Show("El precio ingresado es inválido.");
                 return;
             }
 
@@ -120,9 +139,8 @@ namespace WindowsForms
 
             tipoMembresiaService.Add(tMembresia);
 
-            MessageBox.Show("Tipo Membresía Creada Con Exito");
+            MessageBox.Show("Tipo de Membresía Creada Con Éxito");
         }
-
 
         private void btonEliminar_Click(object sender, EventArgs e)
         {

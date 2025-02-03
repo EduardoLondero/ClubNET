@@ -1,7 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Trabajo Practico\\WindowsForms\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WindowsForms\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7569E626-EF43-4FF2-BFBB-A4301E20DDB3}|..\\WebAPP\\WebAPP.csproj|c:\\users\\lenovo\\onedrive\\escritorio\\clubnet\\webapp\\pages\\administrarpagos.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41C9B460-D2E1-44CE-9206-F1FF26C3D806}|..\\Domain\\Domain.csproj|c:\\users\\lenovo\\onedrive\\escritorio\\clubnet\\domain\\model\\pago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +16,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Pago.cs",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\Domain\\Model\\Pago.cs",
+              "RelativeDocumentMoniker": "..\\Domain\\Model\\Pago.cs",
+              "ToolTip": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\Domain\\Model\\Pago.cs",
+              "RelativeToolTip": "..\\Domain\\Model\\Pago.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAYwBoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-31T00:05:18.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AdministrarPagos.razor",
+              "DocumentMoniker": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\Pages\\AdministrarPagos.razor",
+              "RelativeDocumentMoniker": "..\\WebAPP\\Pages\\AdministrarPagos.razor",
+              "ToolTip": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET\\WebAPP\\Pages\\AdministrarPagos.razor",
+              "RelativeToolTip": "..\\WebAPP\\Pages\\AdministrarPagos.razor",
+              "ViewState": "AQIAAHcAAAAAAAAAAAAAAGwAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-31T00:04:43.519Z",
+              "EditorCaption": ""
             }
           ]
         }

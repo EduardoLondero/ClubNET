@@ -43,39 +43,62 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateMembresia([FromBody] Membresia membresia)
+        public async Task<IActionResult> Post([FromBody] MembresiaDto membresiaDto)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (membresia == null)
-                {
-                    return BadRequest(new { message = "Los datos de la membresía no son válidos." });
-                }
+                return BadRequest(ModelState);
+            }
 
-                _context.Membresia.Add(membresia);
-                await _context.SaveChangesAsync();
-                return Ok(new { message = "Membresía creada con éxito." });
-            }
-            catch (Exception ex)
+            var usuario = await _context.Usuario.FindAsync(membresiaDto.OUsuarioId);
+            var tipoMembresia = await _context.Tipo_Membresia.FindAsync(membresiaDto.oTipo_MembresiaId);
+
+            if (usuario == null || tipoMembresia == null)
             {
-                return StatusCode(500, new { message = "Error interno del servidor.", details = ex.Message });
+                return BadRequest("Usuario o Tipo de Membresía no encontrados.");
             }
+
+            var membresia = new Membresia
+            {
+                fechaInicio = membresiaDto.fechaInicio,
+                fechaFin = membresiaDto.fechaFin,
+                fechaVencimiento = membresiaDto.fechaVencimiento,
+                oUsuario = usuario,
+                oTipo_Membresia = tipoMembresia
+            };
+
+            _context.Membresia.Add(membresia);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetMembresia", new { id = membresia.id }, membresia);
         }
 
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateMembresia(int id, [FromBody] Membresia membresia)
+        public async Task<IActionResult> UpdateMembresia(int id, [FromBody] MembresiaDto membresiaDto)
         {
-            var membresiaExistente = await _context.Membresia.FindAsync(id);
+            var membresiaExistente = await _context.Membresia
+                .Include(m => m.Membresias)
+                .FirstOrDefaultAsync(m => m.id == id);
+
             if (membresiaExistente == null)
             {
                 return NotFound(new { message = "Membresía no encontrada." });
             }
 
-            membresiaExistente.fechaInicio = membresia.fechaInicio;
-            membresiaExistente.fechaFin = membresia.fechaFin;
-            membresiaExistente.fechaVencimiento = membresia.fechaVencimiento;
-            membresiaExistente.OUsuarioId = membresia.OUsuarioId;
-            membresiaExistente.oTipo_MembresiaId = membresia.oTipo_MembresiaId;
+            var usuario = await _context.Usuario.FindAsync(membresiaDto.OUsuarioId);
+            var tipoMembresia = await _context.Tipo_Membresia.FindAsync(membresiaDto.oTipo_MembresiaId);
+
+            if (usuario == null || tipoMembresia == null)
+            {
+                return BadRequest(new { message = "Usuario o Tipo de Membresía no encontrados." });
+            }
+
+            membresiaExistente.fechaInicio = membresiaDto.fechaInicio;
+            membresiaExistente.fechaFin = membresiaDto.fechaFin;
+            membresiaExistente.fechaVencimiento = membresiaDto.fechaVencimiento;
+            membresiaExistente.oUsuario = usuario;
+            membresiaExistente.oTipo_Membresia = tipoMembresia;
 
             try
             {
@@ -87,6 +110,7 @@ namespace WebApp.Controllers
                 return StatusCode(500, new { message = "Error interno del servidor.", details = ex.Message });
             }
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMembresia(int id)

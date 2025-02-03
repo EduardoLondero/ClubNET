@@ -49,5 +49,8 @@
     <Compile Update="Registrase.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ReportePagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

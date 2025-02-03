@@ -30,6 +30,7 @@ namespace WindowsForms
 
             txtFechaCreacion.Enabled = false;
 
+            btonEditar.Enabled = false;
         }
 
         private void btonVolver_Click(object sender, EventArgs e)
@@ -40,6 +41,8 @@ namespace WindowsForms
         private void btonBuscar_Click(object sender, EventArgs e)
         {
             btonEliminar.Enabled = true;
+
+            btonEditar.Enabled = true;
 
             RolServices rolService = new RolServices();
 
@@ -58,6 +61,11 @@ namespace WindowsForms
 
         private void btonCrear_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtDescripcionRol.Text))
+            {
+                MessageBox.Show("Por favor, ingrese una descripción para el rol.");
+                return;
+            }
 
             RolServices rolService = new RolServices();
 
@@ -72,27 +80,35 @@ namespace WindowsForms
 
             rolService.add(rolNuevo);
 
-            MessageBox.Show("Rol Creado con Exito");
+            MessageBox.Show("Rol Creado con Éxito");
         }
 
         private void btonEditar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtDescripcionRol.Text))
+            {
+                MessageBox.Show("Por favor, ingrese una descripción para el rol.");
+                return;
+            }
+
             RolServices rolService = new RolServices();
 
             int idRol = (int)cBoxRol.SelectedValue;
 
-            Rol rolNuevo = new Rol();
+            Rol rolNuevo = rolService.Get(idRol);
 
-            rolNuevo = rolService.Get(idRol);
+            if (rolNuevo == null)
+            {
+                MessageBox.Show("Rol no encontrado.");
+                return;
+            }
 
             rolNuevo.descripcionrol = txtDescripcionRol.Text;
 
             rolService.Update(rolNuevo);
 
-            MessageBox.Show("Rol Actualizado con Exito");
+            MessageBox.Show("Rol Actualizado con Éxito");
         }
-
-
 
 
         private void AdministrarRoles_Load(object sender, EventArgs e)

@@ -51,6 +51,7 @@
             btonEditar = new Button();
             btonCrear = new Button();
             btonEliminar = new Button();
+            btonGenerarReporte = new Button();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -304,11 +305,22 @@
             btonEliminar.UseVisualStyleBackColor = true;
             btonEliminar.Click += btonEliminar_Click;
             // 
+            // btonGenerarReporte
+            // 
+            btonGenerarReporte.Location = new Point(249, 427);
+            btonGenerarReporte.Name = "btonGenerarReporte";
+            btonGenerarReporte.Size = new Size(75, 23);
+            btonGenerarReporte.TabIndex = 11;
+            btonGenerarReporte.Text = "Reporte";
+            btonGenerarReporte.UseVisualStyleBackColor = true;
+            btonGenerarReporte.Click += btonGenerarReporte_Click;
+            // 
             // AdministrarDeportes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btonGenerarReporte);
             Controls.Add(btonEliminar);
             Controls.Add(btonCrear);
             Controls.Add(btonEditar);
@@ -360,5 +372,6 @@
         private Button btonBuscar;
         private Button btonEliminar;
         private ComboBox cBoxDeporte;
+        private Button btonGenerarReporte;
     }
 }

@@ -20,6 +20,7 @@ namespace WindowsForms
             InitializeComponent();
             cargarProvincia();
             cargarLocalidades();
+            btonEditar.Enabled = false;
         }
 
 
@@ -55,6 +56,7 @@ namespace WindowsForms
         private void btonBuscar_Click(object sender, EventArgs e)
         {
             btonCrear.Enabled = false;
+            btonEditar.Enabled = true;
             btonEliminar.Enabled = true;
 
             LocalidadService localidadService = new LocalidadService();
@@ -79,7 +81,6 @@ namespace WindowsForms
         {
             LocalidadService localidadService = new LocalidadService();
 
-
             if (cBoxLocalidad.SelectedValue == null)
             {
                 MessageBox.Show("Seleccione una localidad.");
@@ -87,8 +88,6 @@ namespace WindowsForms
             }
 
             int idLocalidad = (int)cBoxLocalidad.SelectedValue;
-
-
             Localidad localidadToUpdate = localidadService.Get(idLocalidad);
 
             if (localidadToUpdate == null)
@@ -98,14 +97,18 @@ namespace WindowsForms
             }
 
             string nombreLocalidad = txtNombreLocalidad.Text;
-            bool isInt = int.TryParse(txtCodigoPostal.Text, out int codigoPostal);
+            if (string.IsNullOrEmpty(nombreLocalidad))
+            {
+                MessageBox.Show("El nombre de la localidad no puede estar vacío.");
+                return;
+            }
 
+            bool isInt = int.TryParse(txtCodigoPostal.Text, out int codigoPostal);
             if (!isInt)
             {
                 MessageBox.Show("Código Postal ingresado es inválido");
                 return;
             }
-
 
             if (cBoxProvincia.SelectedValue == null)
             {
@@ -113,32 +116,38 @@ namespace WindowsForms
                 return;
             }
 
-
             localidadToUpdate.nombreLocalidad = nombreLocalidad;
             localidadToUpdate.codigoPostal = codigoPostal;
             localidadToUpdate.oProvinciaId = (int)cBoxProvincia.SelectedValue;
 
-
             localidadService.Update(localidadToUpdate);
             MessageBox.Show("Localidad actualizada con éxito");
-
 
             cargarLocalidades();
             cargarProvincia();
         }
-
 
         private void btonCrear_Click(object sender, EventArgs e)
         {
             LocalidadService localidadService = new LocalidadService();
 
             string nombreLocalidad = txtNombreLocalidad.Text;
+            if (string.IsNullOrEmpty(nombreLocalidad))
+            {
+                MessageBox.Show("El nombre de la localidad no puede estar vacío.");
+                return;
+            }
+
             bool isInt = int.TryParse(txtCodigoPostal.Text, out int codigoPostal);
-
-
             if (!isInt)
             {
                 MessageBox.Show("Código Postal ingresado es inválido");
+                return;
+            }
+
+            if (cBoxProvincia.SelectedValue == null)
+            {
+                MessageBox.Show("Seleccione una provincia.");
                 return;
             }
 
@@ -146,20 +155,18 @@ namespace WindowsForms
 
             Localidad localidadToAdd = new Localidad
             {
-                codigoPostal = codigoPostal,
                 nombreLocalidad = nombreLocalidad,
+                codigoPostal = codigoPostal,
                 oProvinciaId = idProvincia
             };
-
 
             localidadService.Add(localidadToAdd);
             MessageBox.Show("Localidad creada con éxito");
 
-
             cargarLocalidades();
             cargarProvincia();
-
         }
+
 
         private void btonEliminar_Click(object sender, EventArgs e)
         {

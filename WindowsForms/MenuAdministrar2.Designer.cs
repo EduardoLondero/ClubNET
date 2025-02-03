@@ -38,6 +38,8 @@
             label4 = new Label();
             btonAdministrarUsuario = new Button();
             btonVolver = new Button();
+            label5 = new Label();
+            btonReporte = new Button();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -69,6 +71,8 @@
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Controls.Add(btonReporte, 1, 3);
+            tableLayoutPanel1.Controls.Add(label5, 0, 3);
             tableLayoutPanel1.Controls.Add(btonAdministrarMembresias, 1, 2);
             tableLayoutPanel1.Controls.Add(btonAdministrarDeportes, 1, 1);
             tableLayoutPanel1.Controls.Add(label2, 0, 0);
@@ -161,6 +165,27 @@
             btonVolver.UseVisualStyleBackColor = true;
             btonVolver.Click += btonVolver_Click;
             // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            label5.AutoSize = true;
+            label5.Location = new Point(3, 297);
+            label5.Name = "label5";
+            label5.Size = new Size(394, 15);
+            label5.TabIndex = 9;
+            label5.Text = "Administrar Reporte:";
+            // 
+            // btonReporte
+            // 
+            btonReporte.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            btonReporte.Location = new Point(403, 293);
+            btonReporte.Name = "btonReporte";
+            btonReporte.Size = new Size(394, 23);
+            btonReporte.TabIndex = 10;
+            btonReporte.Text = "Administrar";
+            btonReporte.UseVisualStyleBackColor = true;
+            btonReporte.Click += btonReporte_Click;
+            // 
             // MenuAdministrar2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -190,5 +215,7 @@
         private Label label4;
         private Button btonAdministrarUsuario;
         private Button btonVolver;
+        private Button btonReporte;
+        private Label label5;
     }
 }

@@ -46,7 +46,16 @@ namespace WindowsForms
 
             form.FormClosed += (s, args) => this.Show();
             form.Show();
-            this.Hide();    
+            this.Hide();
+        }
+
+        private void btonReporte_Click(object sender, EventArgs e)
+        {
+            ReportePagos form = new ReportePagos();
+
+            form.FormClosed += (s, args) => this.Show();
+            form.Show();
+            this.Hide();
         }
     }
 }

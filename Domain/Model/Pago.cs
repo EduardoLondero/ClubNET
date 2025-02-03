@@ -16,4 +16,13 @@ namespace Domain.Model
         public Membresia oMembresia { get; set; }
 
     }
+
+    public class PagoDto
+    {
+        public string estado { get; set; }
+        public DateTime? fechaPago { get; set; }
+        public int oMembresiaId { get; set; }
+        public int precioTotal { get; set; }
+    }
+
 }

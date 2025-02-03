@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Domain.Reports;
 
 namespace WindowsForms
 {
@@ -20,6 +21,7 @@ namespace WindowsForms
 
             cargarDeportes();
 
+            btonEditar.Enabled = false;
         }
 
         public void cargarDeportes()
@@ -43,6 +45,8 @@ namespace WindowsForms
         private void btonBuscar_Click(object sender, EventArgs e)
         {
             btonEliminar.Enabled = true;
+
+            btonEditar.Enabled = true;
 
             btonCrear.Enabled = false;
 
@@ -78,13 +82,11 @@ namespace WindowsForms
             string horaInicio = txtHoraInicio.Text;
             string horaFin = txtHoraFin.Text;
 
-
             if (!int.TryParse(txtPrecioDeporte.Text, out int precio))
             {
                 MessageBox.Show("Precio ingresado inválido");
                 return;
             }
-
 
             Deporte deporteToUpdate = deporteService.Get(idDeporte);
             if (deporteToUpdate == null)
@@ -93,12 +95,22 @@ namespace WindowsForms
                 return;
             }
 
+            if (!IsValidTimeFormat(horaInicio))
+            {
+                MessageBox.Show("La hora de inicio debe tener un formato válido (HH:mm).");
+                return;
+            }
+
+            if (!IsValidTimeFormat(horaFin))
+            {
+                MessageBox.Show("La hora de fin debe tener un formato válido (HH:mm).");
+                return;
+            }
 
             deporteToUpdate.nombreDeporte = nombreDeporte;
             deporteToUpdate.precio = precio;
             deporteToUpdate.horaInicio = horaInicio;
             deporteToUpdate.horaFin = horaFin;
-
 
             deporteService.Update(deporteToUpdate);
 
@@ -114,12 +126,29 @@ namespace WindowsForms
             string horaFin = txtHoraFin.Text;
 
 
-            if (!int.TryParse(txtPrecioDeporte.Text, out int precio))
+            if (string.IsNullOrWhiteSpace(nombreDeporte))
             {
-                MessageBox.Show("Precio ingresado inválido");
+                MessageBox.Show("El nombre del deporte no puede estar vacío.");
                 return;
             }
 
+            if (!int.TryParse(txtPrecioDeporte.Text, out int precio))
+            {
+                MessageBox.Show("Precio ingresado inválido.");
+                return;
+            }
+
+            if (!IsValidTimeFormat(horaInicio))
+            {
+                MessageBox.Show("La hora de inicio debe tener un formato válido (HH:mm).");
+                return;
+            }
+
+            if (!IsValidTimeFormat(horaFin))
+            {
+                MessageBox.Show("La hora de fin debe tener un formato válido (HH:mm).");
+                return;
+            }
 
             Deporte deporteNuevo = new Deporte
             {
@@ -132,14 +161,21 @@ namespace WindowsForms
 
             deporteService.add(deporteNuevo);
 
-            MessageBox.Show("Deporte Creado Con Exito");
+
+            MessageBox.Show("Deporte creado con éxito");
 
             cargarDeportes();
         }
 
+        private bool IsValidTimeFormat(string time)
+        {
+            return TimeSpan.TryParse(time, out _);
+        }
+
+
         private void btonEliminar_Click(object sender, EventArgs e)
         {
-            
+
 
             DeporteService deporteService = new DeporteService();
             MembresiaDeporteService membresiaDeporteService = new MembresiaDeporteService();
@@ -182,5 +218,43 @@ namespace WindowsForms
         {
             btonEliminar.Enabled = false;
         }
+
+        private void btonGenerarReporte_Click(object sender, EventArgs e)
+        {
+            int idDeporte = (int)cBoxDeporte.SelectedValue;
+
+            DeporteService deporteService = new DeporteService();
+            MembresiaDeporteService membresiaDeporteService = new MembresiaDeporteService();
+
+            Deporte deporte = deporteService.Get(idDeporte);
+            if (deporte == null)
+            {
+                MessageBox.Show("No se encontró el deporte seleccionado.");
+                return;
+            }
+
+            List<Membresia_deporte> membresias = membresiaDeporteService.GetMembresiasByDeporteId(idDeporte);
+
+            List<Usuario> usuarios = new List<Usuario>();
+            foreach (var membresia in membresias)
+            {
+                if (membresia.oMembresia?.oUsuario != null)
+                {
+                    usuarios.Add(membresia.oMembresia.oUsuario);
+                }
+            }
+
+            if (usuarios.Count == 0)
+            {
+                MessageBox.Show("No hay usuarios inscritos en este deporte.");
+                return;
+            }
+
+            ReporteDeporteService reporteService = new ReporteDeporteService();
+            reporteService.GenerarReporteInscritos("C:\\Reportes\\Deportes", deporte, usuarios);
+
+            MessageBox.Show("Reporte generado con éxito.");
+        }
+
     }
 }

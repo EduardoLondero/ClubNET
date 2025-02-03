@@ -115,13 +115,21 @@
     {
         try
         {
+            var pagoDto = new PagoDto
+                {
+                    estado = pago.estado,
+                    fechaPago = pago.fechaPago,
+                    oMembresiaId = pago.oMembresiaId,
+                    precioTotal = pago.precioTotal
+                };
+
             if (isEdit)
             {
-                await Http.PutAsJsonAsync($"api/Pagos/{pago.id}", pago);
+                await Http.PutAsJsonAsync($"api/Pagos/{pago.id}", pagoDto);
             }
             else
             {
-                await Http.PostAsJsonAsync("api/Pagos", pago);
+                await Http.PostAsJsonAsync("api/Pagos", pagoDto);
             }
 
             operationSuccess = true;
@@ -136,6 +144,7 @@
             operationError = true;
         }
     }
+
 
     private async Task BuscarPago()
     {
