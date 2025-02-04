@@ -61,7 +61,6 @@ public class UsuariosController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        // Buscar los objetos de Rol y Localidad usando los Id
         var rol = await _context.Rol.FindAsync(usuario.oRolId);
         var localidad = await _context.Localidad.FindAsync(usuario.oLocalidadId);
 

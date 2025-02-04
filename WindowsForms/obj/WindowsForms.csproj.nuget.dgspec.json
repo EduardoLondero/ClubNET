@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ClubNET\\WindowsForms\\WindowsForms.csproj": {}
+    "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WindowsForms\\WindowsForms.csproj": {}
   },
   "projects": {
-    "D:\\ClubNET\\Domain\\Domain.csproj": {
+    "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ClubNET\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "D:\\ClubNET\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\ale_o\\.nuget\\packages\\",
-        "outputPath": "D:\\ClubNET\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ale_o\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -75,21 +74,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\ClubNET\\WindowsForms\\WindowsForms.csproj": {
+    "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WindowsForms\\WindowsForms.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ClubNET\\WindowsForms\\WindowsForms.csproj",
+        "projectUniqueName": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WindowsForms\\WindowsForms.csproj",
         "projectName": "WindowsForms",
-        "projectPath": "D:\\ClubNET\\WindowsForms\\WindowsForms.csproj",
-        "packagesPath": "C:\\Users\\ale_o\\.nuget\\packages\\",
-        "outputPath": "D:\\ClubNET\\WindowsForms\\obj\\",
+        "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WindowsForms\\WindowsForms.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WindowsForms\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ale_o\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -97,15 +96,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-              "D:\\ClubNET\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\ClubNET\\Domain\\Domain.csproj"
+              "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\Domain.csproj"
               }
             }
           }
@@ -169,7 +167,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

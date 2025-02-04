@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ClubNET\\WebAPI\\WebAPI.csproj": {}
+    "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "D:\\ClubNET\\Domain\\Domain.csproj": {
+    "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ClubNET\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "D:\\ClubNET\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\ale_o\\.nuget\\packages\\",
-        "outputPath": "D:\\ClubNET\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ale_o\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -75,21 +74,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\ClubNET\\WebAPI\\WebAPI.csproj": {
+    "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ClubNET\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "D:\\ClubNET\\WebAPI\\WebAPI.csproj",
-        "packagesPath": "C:\\Users\\ale_o\\.nuget\\packages\\",
-        "outputPath": "D:\\ClubNET\\WebAPI\\obj\\",
+        "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WebAPI\\WebAPI.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ale_o\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -97,15 +96,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\ClubNET\\WebAPP\\WebAPP.csproj": {
-                "projectPath": "D:\\ClubNET\\WebAPP\\WebAPP.csproj"
+              "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WebAPP\\WebAPP.csproj": {
+                "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WebAPP\\WebAPP.csproj"
               }
             }
           }
@@ -149,21 +147,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\ClubNET\\WebAPP\\WebAPP.csproj": {
+    "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WebAPP\\WebAPP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ClubNET\\WebAPP\\WebAPP.csproj",
+        "projectUniqueName": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WebAPP\\WebAPP.csproj",
         "projectName": "WebAPP",
-        "projectPath": "D:\\ClubNET\\WebAPP\\WebAPP.csproj",
-        "packagesPath": "C:\\Users\\ale_o\\.nuget\\packages\\",
-        "outputPath": "D:\\ClubNET\\WebAPP\\obj\\",
+        "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WebAPP\\WebAPP.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\WebAPP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ale_o\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -171,15 +169,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\ClubNET\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\ClubNET\\Domain\\Domain.csproj"
+              "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Escritorio\\ClubNET-main\\ClubNET-main\\Domain\\Domain.csproj"
               }
             }
           }
@@ -219,13 +216,13 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.10, )",
+              "version": "[8.0.3, )",
               "autoReferenced": true
             },
             "Microsoft.NET.Sdk.WebAssembly.Pack": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.10, )",
+              "version": "[8.0.3, )",
               "autoReferenced": true
             }
           },
@@ -243,7 +240,7 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-              "version": "[8.0.10, 8.0.10]"
+              "version": "[8.0.3, 8.0.3]"
             }
           ],
           "frameworkReferences": {
@@ -251,7 +248,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
